@@ -258,3 +258,13 @@ t.start();
 }
 ```
 > we can get current thread excution object by using "Thread.currentThread().getName();"
+
+# Thread priority 
+every thread in java has some priority it may be diffult priority gernated by JVM or customised priority provided by programer the valid reange of thread priority is 1 to 10 where,
+1 is min_priority
+10 is max_priortiy 
+thread class deffine the fallowing constants to repregnt some standard priority Thread.min_priority =1, Thread.norm_priority=5, Thread.max_priority=10.
+
+Thread shedular will use priority while allocating proccessr the thread which is having highest priority will get chance first
+
+If two thread have same priority then we cant expect exact excuting order its depends on thread shedular.
