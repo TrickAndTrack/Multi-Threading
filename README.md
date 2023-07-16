@@ -268,3 +268,13 @@ thread class deffine the fallowing constants to repregnt some standard priority 
 Thread shedular will use priority while allocating proccessr the thread which is having highest priority will get chance first
 
 If two thread have same priority then we cant expect exact excuting order its depends on thread shedular.
+
+Thread class define the fallowing methods to get and set priority of thread 
+Example
+public final int getpriority()
+public final void setpriority(int i)
+
+##### difualt priority
+The difualt priority only for the main thread is 5 but for all remaining threads difualt priority will be inherted from parent to child that is whatever priority parent thread has the same priority will be there for the child thread 
+Examples:
+> Note: Some platforms wont provide proper supports for thread prioritys.
