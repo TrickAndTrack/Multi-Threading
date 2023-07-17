@@ -364,3 +364,4 @@ sout("Rama thread");
 > Case:1 Weating of main thread until completing child thread.
 if you comment line one then both the main and child excited similutencly and we can't expect exact output.
 if you not commenting line one then main thread calls the join method on the child thread object hence main thread will wait until completing child thread in these cases output is "Seeta thread" 10 time and "Rama thread" 10 time
+> Case 2: waiting of child thread until completing the main thread now
