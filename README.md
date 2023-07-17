@@ -292,4 +292,75 @@ Example: public static native void yield(){}
 
 ![Yeild_proccess](https://github.com/TrickAndTrack/Multi-Threading/assets/73180409/03ec62ec-3f0c-49ef-b10e-63781edfdf8b)
 
-   
+```
+class myThread extends Thread{
+
+public void run(){
+
+for(i=1; i<10; i++){
+sout("child thread");
+Thread.yield();
+}
+}
+}
+
+class yieldDemo{
+public static void main(String [] arg){
+
+myThread t = new myThread();
+t.start();
+for(i=1; i<10; i++){
+sout("child thread");
+}
+}
+}
+```
+in the above program if you commenting line one then both thread will execute similtencly and we can't expect which thread will complete first.
+if we are not commenting on line one then child thread is always called yield method because of that main thread will get chance more number of time and chance of completing main thread first is high.
+
+>Note: Some platforms won't provide proper support for the yield method.
+
+2) join() -> if thread wants a wait until completing some other thread then we should go for the join method.
+   ex: if t1 want to wait until completing t2 then t1 has to call t2.join(); if t1 execute t2.join() then emeidetly t1 will enter in wating sate untill t2 complete onec t2 compelte then t1 can continue its excution.
+
+Example: ![join_method](https://github.com/TrickAndTrack/Multi-Threading/assets/73180409/72421e99-8b96-47f0-abea-28e24d6c8bc1)
+
+public final void join() throws interaptedException;
+public final void join(long ms) throws interaptedException;
+public final void join(long ms, int ns) throws interaptedException;
+
+> Note: every join method throws an interpretedexception which is a checked exception hence compulsory we should handle it either by using the try-catch or throws keyword other wise e will get compile time error.
+![join_method_in_life_cycle](https://github.com/TrickAndTrack/Multi-Threading/assets/73180409/c2c03256-278c-45ab-b9a0-d95cd3aaa8a3)
+
+if thread shedular allocates processor
+```
+class myThread extends Thread{
+
+public void run(){
+
+for(i=1; i<10; i++){
+sout("Seeta thread");
+try{
+Thread.sleep(2000);
+} Catch(interpretedexception e) {
+
+         }
+      }
+   }
+}
+
+class yieldDemo{
+public static void main(String [] arg){
+
+myThread t = new myThread();
+t.start();
+t.join(10000);
+for(i=1; i<10; i++){
+sout("Rama thread");
+      }
+   }
+}
+```
+> Case:1 Weating of main thread until completing child thread.
+if you comment line one then both the main and child excited similutencly and we can't expect exact output.
+if you not commenting line one then main thread calls the join method on the child thread object hence main thread will wait until completing child thread in these cases output is "Seeta thread" 10 time and "Rama thread" 10 time
