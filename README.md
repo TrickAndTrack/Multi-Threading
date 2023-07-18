@@ -363,5 +363,87 @@ sout("Rama thread");
 ```
 > Case:1 Weating of main thread until completing child thread.
 if you comment line one then both the main and child excited similutencly and we can't expect exact output.
-if you not commenting line one then main thread calls the join method on the child thread object hence main thread will wait until completing child thread in these cases output is "Seeta thread" 10 time and "Rama thread" 10 time
-> Case 2: waiting of child thread until completing the main thread now
+if you not commenting line one then main thread calls the join method on the child thread object hence main thread will wait until completing child thread in these cases output is "Seeta thread" 10 time and "Rama thread" 10 time.
+
+> Case 2: waiting of the child thread until completing the main thread.
+In the above example child thread calls the join method on the main thread object hence child thread has to wait until completing, main thread in this case output is a main thread... followed by the child thread.
+
+> Case 3 if the main thread call join() on the child thread object and the child thread call join() on the main thread object then both the thread will wait forever and the programmer will be stuck (this is something like deadlock)
+
+> Case 4    if a thread calls the join() method on the same thread itself then the program will stuck this is something like a deadlock in this case thread will be waiting an infinite amount of time.
+
+
+3) sleep(): if the thread doesn't want to perform any operation for a particular amount of time then we should go for the sleep method.
+Example: public static native  void sleep() throws InterptedException;
+public static native  void sleep(long ms) throws InterptedException; // Not implemented in java
+public static native  void sleep(long ms, int ns) throws InterptedException; // implemented in java
+
+> Note: every sleep method throws InterptedException, which checked exception whenever we are using sleep method compulsory we should handle InterptedException either by try-catch or throws key word other wise we will get compile time error.
+
+![sleep_method](https://github.com/TrickAndTrack/Multi-Threading/assets/73180409/9b422b3b-c01c-410d-884e-0713fce9fb92)
+
+```
+class slideRoter{
+public static void main(String []arg)  throws InterptedException {
+
+for(i=1; i<10; i++){
+sout("s"+i);
+Thread.sleep(5000);
+      }
+   }
+}
+```
+> How the thread can interrupt to another thread?
+a thread can interrupt a sleeping thread or waiting thread by using the interrupt method of thread class ex. public void interrupt(){}.
+
+```
+class myThread extends Thread{
+
+public void run(){
+
+for(i=1; i<10; i++){
+sout("Seeta thread");
+try{
+Thread.sleep(2000);
+} Catch(interpretedexception e) {
+SOUT("we got interrupted demo");
+         }
+      }
+   }
+}
+```
+```
+class yieldDemo{
+public static void main(String [] arg){
+
+myThread t = new myThread();
+t.start();
+t.interrupt(10000);  -> line (1)
+sout("End of main");
+   }
+}
+```
+if we comment line one then the main thread won't interrupt child thread in this case child loop will execute for loop 10 time.
+if we are not commenting line one then the main thread interrupts child thread in this case output is  
+End of main
+Seeta thread
+we got interrupted demo
+
+> Note whenever we call the interrupt method if the target thread is not in a sleeping state are waiting for state there is no impact of the interrupt call immediately interrupt call will be wanted until the target thread entered into a sleeping or waiting state
+> If a target enters in sleeping or waiting for stat then immediately interrupt the target thread.
+
+If the target thread never entered into a sleeping or waiting state in its lifetime then there is no interrupt call. this is the only case where an interrupted call wested.
+| 1 step  | 2 setp |
+| ------------- | ------------- |
+| ![sleep_method_1](https://github.com/TrickAndTrack/Multi-Threading/assets/73180409/22d0ab8e-640b-4adb-bbd2-1857041a7725) | ![sleep_method_2](https://github.com/TrickAndTrack/Multi-Threading/assets/73180409/2746903c-e4b7-4ab8-9292-b920959adf9d)  |
+
+> In the above example interrupt call waited until the child thread completes for loop 10000 times.
+
+|Propertiy | yeild()  | join() | sleep() |
+|-------------| ------------- | ------------- |-------------|
+| 1 purpose | if a thread wants to pass its execution to give a chance for remaining thread of the same priority then we should go far yield method  | if a thread wants to wait until completing some other threads then we should go for the join method   | If thread don't want to perform any operation for a particular amount of time then we should go for sleep method    |
+|2 is a overloaded or not | no  | yes  | yes  |
+|3 it is final | no  | yes  | no   |
+|4 is it throws IE? | no  | yes  | yes  |
+|5 it is native | yes  | no  | sleep(long ms)--> native and   sleep(long ms, int ns)--> non native |
+|5 it is static | yes  | no  | yes |
