@@ -446,4 +446,4 @@ If the target thread never entered into a sleeping or waiting state in its lifet
 |3 it is final | no  | yes  | no   |
 |4 is it throws IE? | no  | yes  | yes  |
 |5 it is native | yes  | no  | sleep(long ms)--> native and   sleep(long ms, int ns)--> non native |
-|5 it is static | yes  | no  | yes |
+|6 it is static | yes  | no  | yes |
