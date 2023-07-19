@@ -441,9 +441,20 @@ If the target thread never entered into a sleeping or waiting state in its lifet
 
 |Propertiy | yeild()  | join() | sleep() |
 |-------------| ------------- | ------------- |-------------|
-| 1 purpose | if a thread wants to pass its execution to give a chance for remaining thread of the same priority then we should go far yield method  | if a thread wants to wait until completing some other threads then we should go for the join method   | If thread don't want to perform any operation for a particular amount of time then we should go for sleep method    |
+| 1 purpose | If a thread wants to pass its execution to give a chance for the remaining thread of the same priority then we should go far yield method  | If a thread wants to wait until completing some other threads then we should go for the join method   | If thread don't want to perform any operation for a particular amount of time then we should go for sleep method    |
 |2 is a overloaded or not | no  | yes  | yes  |
 |3 it is final | no  | yes  | no   |
-|4 is it throws IE? | no  | yes  | yes  |
+|4 Is it throws IE? | no  | yes  | yes  |
 |5 it is native | yes  | no  | sleep(long ms)--> native and   sleep(long ms, int ns)--> non native |
 |6 it is static | yes  | no  | yes |
+
+# Syncrinization
+Synchronized is a modifier applicable only for methods and blocks but not for classes and variables if multiple threads are trying to operate sumiltencly on the same Java object then there may be a chance of data inconsistency problems 
+to overcome this problem we should go for a synchronized keyword if the method or block is declared as synchronized then at a time only one thread allows to execute the method or block on the given object so that the data inconsistency problem will be resolved.
+The main advantage of the Syncriniz keyword is we can resolve data inconsistency problems but the main disadvantage of the Syncriniz keyword is it increases the waiting time of the thread and creates performance problems hence if there is no specific requirement then is not recommended to use the Synchronize keyword.
+
+internally Synchronization concept is implemented by using a lock every object in Java has a unique lock whenever you are using the Syncriniz keyword then only the lock concept will come into pitcher.
+
+if your thread wants to execute a Synchronized method on a given object first it has to get the lock of that object one thread got the lock then it is allowed to execute any Synchronized method on that object.
+once the method execution complete automaticly thread reliseing lock 
+acuring relesing lock internlly take care by JVM and programer not responsible for this activity 
