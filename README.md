@@ -449,12 +449,81 @@ If the target thread never entered into a sleeping or waiting state in its lifet
 |6 it is static | yes  | no  | yes |
 
 # Syncrinization
-Synchronized is a modifier applicable only for methods and blocks but not for classes and variables if multiple threads are trying to operate sumiltencly on the same Java object then there may be a chance of data inconsistency problems 
+Synchronized is a modifier applicable only for methods and blocks but not for classes and variables if multiple threads are trying to operate simultaneously on the same Java object then there may be a chance of data inconsistency problems 
 to overcome this problem we should go for a synchronized keyword if the method or block is declared as synchronized then at a time only one thread allows to execute the method or block on the given object so that the data inconsistency problem will be resolved.
 The main advantage of the Syncriniz keyword is we can resolve data inconsistency problems but the main disadvantage of the Syncriniz keyword is it increases the waiting time of the thread and creates performance problems hence if there is no specific requirement then is not recommended to use the Synchronize keyword.
 
 internally Synchronization concept is implemented by using a lock every object in Java has a unique lock whenever you are using the Syncriniz keyword then only the lock concept will come into pitcher.
 
 if your thread wants to execute a Synchronized method on a given object first it has to get the lock of that object one thread got the lock then it is allowed to execute any Synchronized method on that object.
-once the method execution complete automaticly thread reliseing lock 
-acuring relesing lock internlly take care by JVM and programer not responsible for this activity 
+once the method execution complete automatically thread releasing lock 
+acquiring releasing lock internally take care by JVM and the programer not responsible for this activity 
+
+while a thread executes a synchronized method on the given object the remaining thread not allowed to execute any synchronized method symultencily on the same object but the remaining thread allows to execute non synchronized methods simultaneously.
+```
+class x{
+sync m1();
+sync m2();
+m3();
+
+}
+// t1 came to excute to m1
+// t2 came to excute to m2
+// t3 came to excute to m3
+```
+lock concept implemented based on the object but not based on the method.
+![sync_1](https://github.com/TrickAndTrack/Multi-Threading/assets/73180409/29dfc6dd-ad98-4125-9f73-8a6259e5deaa )
+```
+<img src=https://github.com/TrickAndTrack/Multi-Threading/assets/73180409/29dfc6dd-ad98-4125-9f73-8a6259e5deaa" alt="alt text" width="250" height="250">
+```
+| Synchronized  | Non - Synchronized |
+| ------------- | ------------- |
+| Whenever we perform the operation {update ADD DELETE REPLACE) ETC. where the state of an object is changing   | Whenever Object state won't be changed like read operation  |
+
+```
+class Display{
+public synchronized void wish(String name ){
+for(int i =0; i<10; i++){
+System.out.print("Good Morning");
+try{
+Thread.sleep(2000);
+} catch(InteruptedException e){
+System.out.println(name);
+}
+}
+}
+}
+class MyThread extends Thread{
+Display d;
+String name;
+
+Mythread(Display d, String name){
+this.d = d;
+this.name = name;
+}
+
+public void run(){
+d.wish(name);
+}
+}
+class SynchronizedDemo{
+public static void main(String[] args){
+Display d = new Display();
+MyThread t1 = new MyThread(d,"Dhoni");
+MyThread t2 = new MyThread(d,"Yuvi");
+t1.start();
+t2.start();
+}
+
+}
+```
+
+>```
+>O/P: 
+>GoodMornign: Dhoni
+>GoodMornign: Yuvi
+>
+>```
+if we are not declaring which method is Synchronized then both threads will be executed simultaneously hence we will get Igreular output.
+
+if we declare which method is Synchronized the at a time only thread will to executed on the given display object hence we will get regular output.
