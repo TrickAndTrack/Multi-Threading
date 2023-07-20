@@ -1,4 +1,4 @@
-# Multi-Threading
+![image](https://github.com/TrickAndTrack/Multi-Threading/assets/73180409/66bc28e4-31dc-40d7-a0e0-60e8f5f28f4d)# Multi-Threading
 The total process is called a thread.
 
 ```
@@ -543,11 +543,11 @@ even those whose method is synchronized will get irregular output because thread
 Conclusion: if multiple threads are operating on the same Java object then synchronization is required.
 if multiple threads operating on multiple Java objects then synchronization is not required. 
 
-### class level lock
-every class in java has a unique lock which is nothing but a class level lock.
-if a thread wants to excute a static synchronized method then thread requred class-level lock. 
+# class-level lock
+every class in Java has a unique lock which is nothing but a class-level lock.
+if a thread wants to execute a static synchronized method then the thread requires a class-level lock. 
 Once the thread got class level lock then it is allowed to execute any static synchronized method of that class.
-Once method execution is complete axiomatically thread released the lock.
+Once the method execution is complete automatically thread released the lock.
 
 ```
 class x{
@@ -620,3 +620,72 @@ t2.start();
 }
 ```
 > working steps-> 1st excute displayn() mehtod then excute displayc() method.
+
+# Synchronized Block
+if very few lines of code are required to synchronize then it is not recommended to declare the entire method Synchronized. we have to inclose those few lines of code by using a Synchronized block.
+the main advantage of Synchronized block is it reduces the waiting time of thread and improve performs of the system.
+
+we can declare Synchronized block as follows 
+1) to get lock of current objects.
+```
+   Synchronized(this){
+  //area
+}
+if a thread got lock of current object then only it is allowed to execute this area
+
+```
+2) to get a particular object.
+```
+   Synchronized(b){
+  //area
+}
+if a thread got a locked of a particular object then only it is allowed to execute this area.
+```
+3) to get the class-level lock
+
+```
+   Synchronized(Desplay.class){
+  //area
+}
+if a thread got class level lock of the "Display" class then only it is allowed to execute this area.
+```
+Example:
+```
+class Display{
+public  void wish(String name ){
+;;;;;;;; 1 lakh code line
+synchronized(this){
+for(int i =0; i<10; i++){
+System.out.print("Good Morning");
+try{
+Thread.sleep(2000);
+} catch(InteruptedException e){}
+System.out.println(name);
+}
+}
+;;;;;;;; 1 lakh code line
+}
+}
+class MyThread extends Thread{
+Display d;
+String name;
+
+Mythread(Display d, String name){
+this.d = d;
+this.name = name;
+}
+public void run(){
+d.wish(name);
+}
+}
+class SynchronizedDemo{
+public static void main(String[] args){
+Display d = new Display();
+MyThread t1 = new MyThread(d,"Dhoni");
+MyThread t2 = new MyThread(d,"Yuvi");
+t1.start();
+t2.start();
+}
+
+}
+```
