@@ -527,3 +527,96 @@ t2.start();
 if we are not declaring which method is Synchronized then both threads will be executed simultaneously hence we will get Igreular output.
 
 if we declare which method is Synchronized the at a time only thread will to executed on the given display object hence we will get regular output.
+
+Case study:
+```
+display d1 = new display();
+display d2 = new display();
+
+MyThread t1 = MyThread(d1,Dhoni);
+MyThread t2 = MyThread(d2,yuvi);
+
+t1.start();
+t2.start();
+```
+even those whose method is synchronized will get irregular output because threads are operating on different Java objects.
+Conclusion: if multiple threads are operating on the same Java object then synchronization is required.
+if multiple threads operating on multiple Java objects then synchronization is not required. 
+
+### class level lock
+every class in java has a unique lock which is nothing but a class level lock.
+if a thread wants to excute a static synchronized method then thread requred class-level lock. 
+Once the thread got class level lock then it is allowed to execute any static synchronized method of that class.
+Once method execution is complete axiomatically thread released the lock.
+
+```
+class x{
+static synchronized m1()
+static synchronized m2()
+static m3()
+synchronized m4()
+m5()
+
+}
+
+```
+Diagram of execution of the above program. 
+![sync_2](https://github.com/TrickAndTrack/Multi-Threading/assets/73180409/8f7498d6-ac60-49f9-8298-b33e50ea0ae9)
+
+while thread executing static synchronized method() the reaming threads are not allowed to execute any static synchronized method of that class symultensly remaining threads are allowed to execute the following method execute simultesinly 1) normAL STATIC method 2) synchronized instance method 3)normal instance method.
+
+```
+class Display{
+public synchronized void displyn(String name ){
+for(int i =0; i<10; i++){
+System.out.print(i);
+try{
+Thread.sleep(2000);
+} catch(InteruptedException e){
+         }
+      }
+   }
+public synchronized void displyc(String name ){
+for(int i =65; i<75; i++){
+System.out.print((char)i);
+try{
+Thread.sleep(2000);
+} catch(InteruptedException e){
+         }
+      }
+   }
+}
+class MyThread1 extends Thread{
+Display d;
+
+Mythread(Display d){
+this.d = d;
+}
+
+public void run(){
+d.displyn();
+}
+}
+
+class MyThread1 extends Thread{
+Display d;
+
+Mythread2(Display d){
+this.d = d;
+}
+
+public void run(){
+d.displyc();
+}
+}
+class SynchronizedDemo{
+public static void main(String[] args){
+Display d = new Display();
+MyThread t1 = new MyThread(d);
+MyThread t2 = new MyThread(d);
+t1.start();
+t2.start();
+}
+}
+```
+> working steps-> 1st excute displayn() mehtod then excute displayc() method.
