@@ -690,3 +690,24 @@ t2.start();
 
 }
 ```
+Log concept applicable object types and class type but not for primitive hence we cant pass primitive type as argument to synchronized block otherwise we will get compile time error. saying unexpected type found int required reference.
+
+# FAQ 
+![FAQ](https://github.com/TrickAndTrack/Multi-Threading/assets/73180409/4c215f75-5947-453d-a496-979076653d6a)
+2) we can resolve in consistency problem
+3) it increases a waiting time of thread and increase a perform opretion.
+4) if multiple threads are operating symultensly on the same java object then there may be chance of data inconsistency problems this is called the rest condition. we can overcome this problem by using synchronized keywords. 
+
+Q 8) While a thread executing a synchronized method on a given object is a remaining thread is allowed to execute any other synchronized method simultensly on the same object -> No
+Q 9) what is a synchronized Block?
+Q 10) how to declare a synchronized Block to get the lock of the current object?
+Q 11) how to declare a synchronized Block to get a class level lock?
+Q 12) what is the advantage of the synchronized block over the synchronized method?
+Q 13) Is a thread that can acquire multiple locks simultensly? yes-> from different objects.
+Ans -> ![FAQ_ans_13](https://github.com/TrickAndTrack/Multi-Threading/assets/73180409/89f60f5b-b765-4ab5-9a84-bfef49a0be88)
+
+Q 14)  What is a synchronized statement? -> Interview peoeple to create terminology.
+the statement present in the synchronized method and synchronized block are called a synchronized statement.
+
+
+
