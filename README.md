@@ -709,5 +709,21 @@ Ans -> ![FAQ_ans_13](https://github.com/TrickAndTrack/Multi-Threading/assets/731
 Q 14)  What is a synchronized statement? -> Interview peoeple to create terminology.
 the statement present in the synchronized method and synchronized block are called a synchronized statement.
 
+# Inter Thread Communication 
+
+Conclusion 1: Two thread can communicate each other by using wait() notify() and notifyAll() methods
+The thread which is expecting updation is responsible to wait() method then immediately thread will enter into a waiting state.
+The Thread which is responsible to perform updation after performing updation it is responsible to call notify method then the waiting thread will get the notification and continue its execution with those updated items.
+
+## wait()
+## notify()
+## notifyAll()
+
+Q) why the above method are in object class?
+-> & Conclusion 2:  all methods are present in the object class but not in the thread class because thread can call this method on any Java object.
+
+Conclusion 3:  To call wait() or notify() or notifyAll() method on any object, thread should be owner of that object that is thread should has a lock of that object that is thread should be inside the syncronzed area henace we can call wait and notify and notifyAll method from only synchronized are otherwise we will get a runtime exception saying IllegalmonitarStateException.
+
+Conclusion 4: If a thread calls the wait method on any object it emmidatly releases the lock of that particular object and enters into a waiting state.
 
 
