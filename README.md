@@ -726,4 +726,32 @@ Conclusion 3:  To call wait() or notify() or notifyAll() method on any object, t
 
 Conclusion 4: If a thread calls the wait method on any object it emmidatly releases the lock of that particular object and enters into a waiting state.
 
+If thread calls notify() method on any object it releases the lock of an object that may not immediately except wait() notify() and notifyAll() there is no other method where the thread release lock.
 
+| Method  | Is Thread release lock? |
+| ------------- | ------------- |
+| yeild()  | No|
+| join()  | No |
+| sleep()  | No |
+| wait()  | Yes |
+| notify()  | Yes |
+| notifyAll()  | Yes |
+
+Q) which of the following is valid?
+1) if threads call wait() method immediately it will enter into a waiting state without releasing any lock
+2) if threads call wait() method it releases lock of that object but may not immediately.
+3) if threads call wait() method on any object it releases all locks acquired by that thread and immediately enters into the waiting state.
+4) if threads call wait() method on any object it immediately releases the lock of that particular object and enters into a waiting state.
+5) if threads call notify() method on any object it immediately releases the lock of that particular object.
+6) if threads call notify() method on any object it releases lock of that object but my not immediately.
+   correct -> 4 and 6.
+
+public final void wait();
+public final native void wait(long ms);
+public final void wait(long ms, int ns);
+public final native void notify();
+public final native void notifyAll(long ms);
+
+> Note: Very wait method throws an interpreted exception which is a checked exception hence whenever we are using wait() method compulsory we should handle this interpreted exception either by try-catch or throws keyword other wise we will get compile time error.
+
+> Imp Note: 
