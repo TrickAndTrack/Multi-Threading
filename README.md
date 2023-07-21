@@ -1,4 +1,3 @@
-![image](https://github.com/TrickAndTrack/Multi-Threading/assets/73180409/66bc28e4-31dc-40d7-a0e0-60e8f5f28f4d)# Multi-Threading
 The total process is called a thread.
 
 ```
