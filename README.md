@@ -753,5 +753,3 @@ public final native void notify();
 public final native void notifyAll(long ms);
 
 > Note: Very wait method throws an interpreted exception which is a checked exception hence whenever we are using wait() method compulsory we should handle this interpreted exception either by try-catch or throws keyword other wise we will get compile time error.
-
-> Imp Note: 
