@@ -794,7 +794,7 @@ Example :
 we can use notify method to give notification to only one waiting thread if multiple threads are waiting then only one thread will be notified the remaining thread have to wait for further notification. 
 Which thread will be notified we can't expect it depends on JVM.
 
-We can use notifyAll to give notifications for all waiting threads of your particular object even though multiple threads are notified but execution will be performed one by one because threads are required lock and only one lock is available.
+We can use notifyAll to give notifications for all waiting threads of your particular object even though multiple threads are notified but execution will be performed one by one because threads are required to lock and only one lock is available.
 > Note: on which object we are calling the wait method thread required the lock of that particular object if we are calling the wait method on S1 then we have to get the lock of the s1 object but not the s2 object.
 
 Stack s1 = new Stack();
@@ -812,3 +812,15 @@ s1.wait()
 }
 > correct one
 ```
+# Dead lock
+If two thread are waiting for each forever sach type of infinite waiting is called Deadlock.
+synchronization keyword is only resone for deadlock situvation henace while using synchroniz keyword we have to take spaecial care there is no resolvtion for deadlock but servral prevtntion tachnique are avialable.
+
+# deadLock vs starveation
+
+long waiting of a thread where waiting neverends is called deadlock.
+where as long waiting of a thread where waiting ends at certan point is called startvation.
+Low priority thread has to wait untill completing all high priority threads it may be long waiting but ends a yet certun point is called which is nothing but starvation.
+
+
+
