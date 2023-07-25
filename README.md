@@ -799,13 +799,16 @@ We can use notifyAll to give notifications for all waiting threads of your parti
 
 Stack s1 = new Stack();
 Stack s2 = new Stack();
-
+```
 synchronization (s1){
 s2.wait()
 }
 RE: IllegalMoniterzaException
+```
 ------------------------------------
+```
 synchronization (s1){
 s1.wait()
 }
 > correct one
+```
