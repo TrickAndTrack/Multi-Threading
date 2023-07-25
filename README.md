@@ -753,3 +753,59 @@ public final native void notify();
 public final native void notifyAll(long ms);
 
 > Note: Very wait method throws an interpreted exception which is a checked exception hence whenever we are using wait() method compulsory we should handle this interpreted exception either by try-catch or throws keyword other wise we will get compile time error.
+
+```
+class ThreadA{
+public static void main(String[] arg){
+ThreadB b= new ThreadB();
+b.start();
+synchronized(b){
+{
+System.out.println("Main Threada calling "); // 1 step
+b.wait();
+System.out.println("Main Threada got notification ");  // 4th
+System.out.println(b.total()); // 5th
+}
+}
+}
+class ThreadB extends Thread{
+int total =0;
+public void run(){
+synchronized(this);
+{
+System.out.println("child Threads calcultion "); // 2nd
+b.wait();
+for(int i =0; i<=100; i++){
+total = total+i;
+
+System.out.println("child Threads given notification" ); // 3rd
+this.notify();
+}
+}
+}
+```
+# Producer consumer problems.
+The producer thread is responsible for Producer to the queue and the consumer thread is responsible to consume atoms from the queue, if queue is empty consumer thread method calls the wait method and entered into the waiting state. after Producing atoms to the queue IS RESPONSIBLE to call notify method then the waiting consumer will get that notification and continue its execution with updated atoms.
+Example :
+![PCP_1](https://github.com/TrickAndTrack/Multi-Threading/assets/73180409/4bf89da2-47fe-40bd-9d62-4ce066676088)
+
+
+### Difference between notify and notifyAll
+we can use notify method to give notification to only one waiting thread if multiple threads are waiting then only one thread will be notified the remaining thread have to wait for further notification. 
+Which thread will be notified we can't expect it depends on JVM.
+
+We can use notifyAll to give notifications for all waiting threads of your particular object even though multiple threads are notified but execution will be performed one by one because threads are required lock and only one lock is available.
+> Note: on which object we are calling the wait method thread required the lock of that particular object if we are calling the wait method on S1 then we have to get the lock of the s1 object but not the s2 object.
+
+Stack s1 = new Stack();
+Stack s2 = new Stack();
+
+synchronization (s1){
+s2.wait()
+}
+RE: IllegalMoniterzaException
+------------------------------------
+synchronization (s1){
+s1.wait()
+}
+> correct one
