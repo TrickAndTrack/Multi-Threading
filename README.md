@@ -841,4 +841,38 @@ but changing deamon naeture is possible before starting of thread only after sta
 by defult main thread is allways non deamon & all reamming thread are daemon threads neature will be inhertited parent ot child if parenrt thread is demaon then ai=utoomaticly child thread is also daemon and if parent threads is non daemon then automaticly child thread also non daemon.
 it is imposible to chang daemon neature of main thread it is allreday started by JVm by bigning.
 whenevre last non-daemon thread terminate automatically all daemon thread will be terminated erespective of there positon.
+# FAQ 
+What is green Thread?
+
+. ) Java multithreadinf condcept is implemet=nting by using following two models 
+1) green thread model
+2) native voice model
+
+### green thread model
+a thread which is mangae completely by JVM wihtout taking underlying OS support is called Green Thread.
+very few operting system like sun solries provide support for geen thread model.
+grren thread model is depratcated and not recommended to use.
+
+# native OS model
+The thread which is mannaged by JVM  with the help of underlying OS, is called native OS model.
+All windows based operting sysytem provide support for native OS model.
+
+How to stop a thread? t.stop();
+we can stop() a threaad excution by using stop method of thread a class
+public void stop method
+if call stop method immdetly thread will enter into deadState.
+anyway stop method is depricated and not recommended to use.
+
+### how to sussped and resume of a thread.
+t.suspend();
+how can we resume suspend thread?
+t.resume();
+
+we can susppend a thread by using suspend() method of thread class. then immidetly thread will entered into susppednded state.
+we can resume a suspended thred by using resume() method of thread class then suspended thread can continew its exxicution.
+public void suspend();
+public void resume();
+> anyway this methods are dipricated and not recommmeded to use.
+
+# life cycle Image
 
