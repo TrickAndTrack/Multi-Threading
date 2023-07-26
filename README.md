@@ -822,5 +822,23 @@ long waiting of a thread where waiting neverends is called deadlock.
 where as long waiting of a thread where waiting ends at certan point is called startvation.
 Low priority thread has to wait untill completing all high priority threads it may be long waiting but ends a yet certun point is called which is nothing but starvation.
 
+# Daemon Thread
+The Thread which is excuting in background
+Example 1) Attach Lister, Signal Dispatcher, Gc
+The Threads which are excuting in background are called "Daeomn Threads".
+The main objective daemon thread is to provide support for non daemon threads the main threaad.
+for example if main thread run with low memory then GVM run GC() to distory the useless Object so that number of bite of free meoery will be improved with this free memory main thread can continiew its excution.
 
+useuallly Daemon thread having low priority but based on our requremnt daemon threads can run with high priority also.
+we can check daemon neature of a thread by using is daemon method of thread class.
+1) public boolean isDaemon();
+
+we can change daemon neture of thread by using setDaemon neature.
+1) public void setDaemon(boolean b)
+but changing deamon naeture is possible before starting of thread only after starting a thread if we are trying to change daemon naeture then we will get runtime exception saying illegalthreadexception.
+
+# Deafult neature 
+by defult main thread is allways non deamon & all reamming thread are daemon threads neature will be inhertited parent ot child if parenrt thread is demaon then ai=utoomaticly child thread is also daemon and if parent threads is non daemon then automaticly child thread also non daemon.
+it is imposible to chang daemon neature of main thread it is allreday started by JVm by bigning.
+whenevre last non-daemon thread terminate automatically all daemon thread will be terminated erespective of there positon.
 
