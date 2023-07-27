@@ -944,7 +944,7 @@ int this subgroupThread also will be considered.
 
 9) int enumerate(ThreadGroup[] t); // to caopy all active subThreadgroup into thread group[].
 
-10) boolean isDaemon(); // to check weather the thread group is daemon or not.
+10) boolean isDaemon(); // to check whether the thread group is daemon or not.
 
 11) void setDaemon(boolean b); //  
 
@@ -964,3 +964,34 @@ for(Thread t1 : t){
 
 System.out.println(t1.getName()+ "----" + t1.isDaemon());
 }}}
+```
+# java.util.concurrent
+The problem with the traditional synchronize keywords
+1) we are not having any flexibility to try for a lock without waiting.
+2) There is know way to specific max waiting time for a thread to get locked so that thread will wait until getting locked which may create a performance problem that may cause deadlock.
+3) if threads released a lock which waiting thread will get that lock we are not having any control over this.
+4) there is no API to list all waiting threads for a lock.
+5) synchronize keyword compulsory we have to use either at the method level or within a method and it is not possible to use across multiple method().
+> To overcome this problem sum people introduce java.util.concurrent.lock package in 1.5 v.
+> its also provide several enhance ment to programmer to provide more control to concurrency.
+
+
+# lock intraface
+lock object similar to an implicit lock acquired by a thread to execute a synchronized method or synchronized block.
+lock implementation provides more extensive operation than the traditional implicit lock.
+
+# Important methods of lock intraface
+1) void lock(); // we can use this method to acquire a lock. if the lock already available then the current thread will get that lock. if the lock is not already available then it will wait until getting locked. it is exactly same behavior of the traditional synchronized keyword.
+
+2) boolean tryLock(); // to acquired lock without waiting, if the lock is available then thred acquired the lock and return true. if the lock is not available then this method flase and continue execution without waitiing this case thread never be entered into the waiting state.
+
+3) boolean tryLock(long time, Timeunit unit); // if lock is available then the thread will get the lock and continue its execution. if the lock is not available then thread will wait until a specified amount of time still, lock is not available then can continue its execution.
+
+4) void UnLock(); // To release a lock 
+
+# TimeUnit
+TimeUnit is an enum prsent in java.util.cocurrent package.
+```
+if(l.tryLock(1000, TimeUnit Miliseconde)){
+}
+```
