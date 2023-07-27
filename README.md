@@ -931,7 +931,7 @@ System.out.println(t3.getPriority()); // 3
 ```
 ![image](https://github.com/TrickAndTrack/Multi-Threading/assets/73180409/e65f055c-9c3b-48bd-ab07-eee1e698e8fb)
 
-4)ThreadGroup getParent(); // return parent group of current thread. 
+4)ThreadGroup getParent(); // return parent group of current thread.
 
 5) void list(); // its aprint informtion about thread  group to the console.
 
@@ -964,10 +964,3 @@ for(Thread t1 : t){
 
 System.out.println(t1.getName()+ "----" + t1.isDaemon());
 }}}
-
-
-}
-
-
-}
-
