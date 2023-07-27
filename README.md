@@ -932,14 +932,42 @@ System.out.println(t3.getPriority()); // 3
 ![image](https://github.com/TrickAndTrack/Multi-Threading/assets/73180409/e65f055c-9c3b-48bd-ab07-eee1e698e8fb)
 
 4)ThreadGroup getParent(); // return parent group of current thread. 
+
 5) void list(); // its aprint informtion about thread  group to the console.
+
 6) int activeCount(); // returns number of active threads present in thread group.
+
 7) int activeGroupCount(); // returns the number od active group prsent in current thread group.
+
 8) int enumerate(Thread[] t); // to copy all active threads of this thread group into a provided thread [].
 int this subgroupThread also will be considered.
+
 9) int enumerate(ThreadGroup[] t); // to caopy all active subThreadgroup into thread group[].
+
 10) boolean isDaemon(); // to check weather the thread group is daemon or not.
+
 11) void setDaemon(boolean b); //  
+
 12) void interrupt(); // to interrupt all waiting or sleeping thread preset in a thread group.
+
 13) void destroy(); // to destroy thread group and sub-thread groups.
+
+write a program to display all active threads' name belongs to system grops and child groups.
+```
+class ThreadGroupDemo4{
+public static void main(String[] args){
+
+ThreadGroup system = Thread.currentThread().getThreadGroup().getParent();
+Thread[] t = new Thread[sysytem.activeCount()];
+system.enumerate(t);
+for(Thread t1 : t){
+
+System.out.println(t1.getName()+ "----" + t1.isDaemon());
+}}}
+
+
+}
+
+
+}
 
