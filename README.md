@@ -817,7 +817,6 @@ If two thread are waiting for each forever sach type of infinite waiting is call
 synchronization keyword is only resone for deadlock situvation henace while using synchroniz keyword we have to take spaecial care there is no resolvtion for deadlock but servral prevtntion tachnique are avialable.
 
 # deadLock vs starveation
-
 long waiting of a thread where waiting neverends is called deadlock.
 where as long waiting of a thread where waiting ends at certan point is called startvation.
 Low priority thread has to wait untill completing all high priority threads it may be long waiting but ends a yet certun point is called which is nothing but starvation.
@@ -829,50 +828,118 @@ The Threads which are excuting in background are called "Daeomn Threads".
 The main objective daemon thread is to provide support for non daemon threads the main threaad.
 for example if main thread run with low memory then GVM run GC() to distory the useless Object so that number of bite of free meoery will be improved with this free memory main thread can continiew its excution.
 
-useuallly Daemon thread having low priority but based on our requremnt daemon threads can run with high priority also.
-we can check daemon neature of a thread by using is daemon method of thread class.
+Usually, Daemon thread have low priority but based on our requirement daemon threads can run with high priority also.
+we can check the daemon nature of a thread by using is daemon method of thread class.
 1) public boolean isDaemon();
 
-we can change daemon neture of thread by using setDaemon neature.
+we can change the daemon nature of thread by using setDaemon nature.
 1) public void setDaemon(boolean b)
-but changing deamon naeture is possible before starting of thread only after starting a thread if we are trying to change daemon naeture then we will get runtime exception saying illegalthreadexception.
+but changing daemon nature is possible before starting of thread only after starting a thread if we are trying to change daemon naeture then we will get a runtime exception saying illegalthreadexception.
 
-# Deafult neature 
-by defult main thread is allways non deamon & all reamming thread are daemon threads neature will be inhertited parent ot child if parenrt thread is demaon then ai=utoomaticly child thread is also daemon and if parent threads is non daemon then automaticly child thread also non daemon.
-it is imposible to chang daemon neature of main thread it is allreday started by JVm by bigning.
-whenevre last non-daemon thread terminate automatically all daemon thread will be terminated erespective of there positon.
+# Deafult nature 
+by default main thread is always non-daemon & all reaming threads are daemon threads nature will be inherited parent or child if the parent thread is a demon then ai=utoomaticly child thread is also daemon and if the parent thread is non-daemon then automatically child thread is also non-daemon.
+it is impossible to change the daemon nature of the main thread it is already started by JVm by binging.
+whenever the last non-daemon thread terminates automatically all daemon thread will be terminated irrespective of there positon.
 # FAQ 
 What is green Thread?
 
-. ) Java multithreadinf condcept is implemet=nting by using following two models 
+. ) Java multithreading condcept is implemet=nting by using the following two models 
 1) green thread model
 2) native voice model
 
-### green thread model
-a thread which is mangae completely by JVM wihtout taking underlying OS support is called Green Thread.
-very few operting system like sun solries provide support for geen thread model.
-grren thread model is depratcated and not recommended to use.
+### Green thread model
+a thread which is managed completely by JVM without taking underlying OS support is called Green Thread.
+very few operating systems like Sun Sources provide support for the green thread model.
+green thread model is deprecated and not recommended to use.
 
 # native OS model
-The thread which is mannaged by JVM  with the help of underlying OS, is called native OS model.
-All windows based operting sysytem provide support for native OS model.
+The thread which is managed by JVM  with the help of the underlying OS, is called the native OS model.
+All Windows-based operating systems provide support for native OS models.
 
 How to stop a thread? t.stop();
-we can stop() a threaad excution by using stop method of thread a class
+we can stop() a thread execution by using the stop method of threading a class
 public void stop method
-if call stop method immdetly thread will enter into deadState.
-anyway stop method is depricated and not recommended to use.
+if the call-stop method is immediate thread will enter into a dead state.
+anyway stop method is deprecated and not recommended to use.
 
-### how to sussped and resume of a thread.
+### how to suspend and resume a thread.
 t.suspend();
 how can we resume suspend thread?
 t.resume();
 
-we can susppend a thread by using suspend() method of thread class. then immidetly thread will entered into susppednded state.
-we can resume a suspended thred by using resume() method of thread class then suspended thread can continew its exxicution.
+we can suspend a thread by using suspend() method of the thread class. then immediately thread will be entered into a suspended state.
+we can resume a suspended thread by using the resume() method of the thread class then the suspended thread can continue its execution.
 public void suspend();
 public void resume();
-> anyway this methods are dipricated and not recommmeded to use.
+> Anyway these methods are deprecated and not recommended to use.
 
 # life cycle Image
+![Life_Cycle](https://github.com/TrickAndTrack/Multi-Threading/assets/73180409/e269205d-88fc-4b8c-b16e-48f37bd234fb)
+
+* Enhancement Multithreading* 
+# ThreadGroup
+based on functionality we can group threads into a single unit which is nothing but a thread group is thread group contains a group of threads in addition to threads thread group can also contain sub-threads groups.
+The main advantage of maintaining threads in a thread group is we can perform common operations easily.
+
+every thread in Java belongs to some group main threads belong to main group.
+every thread group in java is a child group of the system group either directly or indirectly hence system group accesses root for all thread groups in Java.
+
+SYstem-group contains several system-level threads like finalized, reference handler,
+singal dispatcher, attache listner.
+![image](https://github.com/TrickAndTrack/Multi-Threading/assets/73180409/54bb327a-dbb7-4a27-9ede-14677d8bca10)
+
+Thread group is a Java class present in Java.lang package it is a direct child class of object.
+### Constructor 
+1) ThreadGrouo g = new ThreadGrouo(String name);
+Create a new thread group with a specific group name.
+the parent of the new group is the thread group of the currently existing thread.
+
+3) ThreadGrouo g = new ThreadGrouo(ThreadGroup m, String GroupName);
+Create a new thread group with a specific group name.
+the parent of the new group is the specified parent group.
+ThreadGrouo g1 = new ThreadGrouo( g1, "Group Name");
+
+```
+class Test{
+public static void main(String[] args){
+ThreadGrouo g = new ThreadGrouo("First group Name");
+System.out.println(g1.getParent().getName()); // main
+ThreadGrouo g2 = new ThreadGrouo(g1, "Second group name");
+System.out.println(g2.getParent().getName()); // First group Name
+}
+}
+```
+# important methods of Thread group class.
+1) String getName() ; // return name of group
+2) int getMaxPriority(); //  return max priority of thread group
+3) void setMaxPriority(int p); //  to set maximum priority of thread group & difualt max priority is 10.
+Threads in the threads group that already have higher priority wont be effected but for newly added threads with this max priority is applicable.
+
+```
+class Test{
+public static void main(String[] args){
+ThreadGrouo g1 = new ThreadGrouo("to");
+Thread t1 = new Thread(g1, "Thread1");
+Thread t2 = new Thread(g1, "Thread2");
+g1.setMaxPriority(3)
+Thread t3 = new Thread(g1, "Thread3");
+System.out.println(t1.getPriority()); //5
+System.out.println(t2.getPriority());// 5
+System.out.println(t3.getPriority()); // 3
+}
+}
+```
+![image](https://github.com/TrickAndTrack/Multi-Threading/assets/73180409/e65f055c-9c3b-48bd-ab07-eee1e698e8fb)
+
+4)ThreadGroup getParent(); // return parent group of current thread. 
+5) void list(); // its aprint informtion about thread  group to the console.
+6) int activeCount(); // returns number of active threads present in thread group.
+7) int activeGroupCount(); // returns the number od active group prsent in current thread group.
+8) int enumerate(Thread[] t); // to copy all active threads of this thread group into a provided thread [].
+int this subgroupThread also will be considered.
+9) int enumerate(ThreadGroup[] t); // to caopy all active subThreadgroup into thread group[].
+10) boolean isDaemon(); // to check weather the thread group is daemon or not.
+11) void setDaemon(boolean b); //  
+12) void interrupt(); // to interrupt all waiting or sleeping thread preset in a thread group.
+13) void destroy(); // to destroy thread group and sub-thread groups.
 
