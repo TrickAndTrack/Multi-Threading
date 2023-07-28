@@ -1151,4 +1151,13 @@ t2.start();
 }
 }
 ```
-
+# Threads pools
+Threads pool Creating a new thread for every job may create performace and memory problems to overcome this we should go for a thread pool.
+The thread pool is a pool of already created thread ready to do our job Java 1.5 version introduces framework to implement thread pool 
+Thread pool framework also known as executor framework.
+we can create thread pool as follows
+Ex: ExcutorService service =  Excutors.newFixedThreadPool(3);
+we can submit a runnable Job by using submit method().
+service.submit(job);
+we can shutdown executors service by using.
+service.shutdown();
