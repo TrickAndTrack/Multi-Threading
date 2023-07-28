@@ -995,3 +995,160 @@ TimeUnit is an enum prsent in java.util.cocurrent package.
 if(l.tryLock(1000, TimeUnit Miliseconde)){
 }
 ```
+
+# ReententrLock();
+it is the implementation of the lock interface and it is a direct child class of the Object.
+
+Reenterent means a thread can acquire same lock multiple time wihtout any issues, internally reenter lock increments the thread personal count whenever we call the lock method and the decrement count value whenever threads call unlock method lock will be released whenever count reaches zero.
+
+ReententrLock l = new ReententrLock();
+creates an instance of ReententrLock
+ReententrLock l = new ReententrLock(boolean fairness);
+creates a ReententrLock with given fairness policy.
+if fairness is true then the longest waiting thread can acquire cac lock if it is available it follows a first come first serve policy.
+if fairness is false then which waiting thread will get a chance we cant expect?
+the difficult value for fairness is false.
+Q) 1 Which of the following declaration are equal?
+ReententrLock l = new ReententrLock();
+ReententrLock l = new ReententrLock(true);
+ReententrLock l = new ReententrLock(false);
+All the Above
+Ans-> 1 and 3.
+
+An important method of Reentern lock.
+1) void lock()
+2) boolean tryLock()
+3) boolean tryLock(long l, TimeUnit t)
+4) void lockInterruptibly()
+5) void unlock()
+
+Extra Methods
+1) int getHoldCount() // return number of hold on this lock by the current thread.
+2) boolean isHeldByCirrentThread() // boolean is held by current thread. returns true if and only if lock hold by current thread
+3) int getQueueLength() // in get Queue length returns the number of thread waiting for the lock
+4) Collection getQueuedThreads() // collection get Qued threads it return a collection of thread which are waiting to get locked
+5) boolean hasQueuedThreads() // returns true if any threads  to get locked
+6) boolean isLocked() //  returns true if locked aqured by some thread
+7) boolean isFair() // returns true retuns true if the fair ness policy is set with true value.
+8) Thread getOwner() // returns the thread which aqured lock.
+![image](https://github.com/TrickAndTrack/Multi-Threading/assets/73180409/da28771a-5704-48f6-8cad-06f30a17d874)
+
+ ```
+Import java.util.concurrent.locks.*;
+
+class Display{
+ReententrLock l = new ReententrLock();
+public  void wish(String name ){
+l.lock(); // ---- line 1
+for(int i =0; i<10; i++){
+System.out.print("Good Morning");
+try{
+Thread.sleep(2000);
+} catch(InteruptedException e){
+}
+System.out.println(name);
+}
+l.unlock(); // ---- line 2
+}
+}
+class MyThread extends Thread{
+Display d;
+String name;
+My thread(Display d, String name){
+this.d = d;
+this.name = name;
+}
+public void run(){
+d.wish(name);
+}
+}
+class ReentrantLockDemoDemo{
+public static void main(String[] args){
+Display d = new Display();
+MyThread t1 = new MyThread(d,"Dhoni");
+MyThread t2 = new MyThread(d,"Yuvi");
+MyThread t3 = new MyThread(d,"Ganguly");
+t1.start();
+t2.start();
+t3.start();
+}
+
+}
+```
+if we comment on lines one and two then the thread will be executed simultensly and we will get output if we are not commenting on lines one and two then the threads will be executed one by one and we will get regular output.
+
+# Demo Program for tryLock() ~
+```
+Import java.util.concurrent.locks.*;
+class MyThread extends Thread{
+ReententrLock l = new ReententrLock();
+MyThread(String name){
+super(name);
+}
+public void run(){
+if(l.tryLock()){
+System.out.println(Thread.currentThread()+getName()+"...got lock and performing safe operations");
+try{
+Thread.sleep(2000);
+}catch(InteruptedException e)
+{}
+l.unlock();
+}
+else{
+System.out.println(Thread.currentThread().getName()+".. unable to get lock and hence performing alternative operations" );
+}
+}
+}
+class ReentrantLockDemoDemo{
+public static void main(String[] args){
+
+MyThread t1 = new MyThread("First Thread");
+MyThread t2 = new MyThread("Second Thread");
+t1.start();
+t2.start();
+}
+
+}
+```
+```
+Import java.util.concurrent.locks.*;
+Import java.util.concurrent.*;
+
+class MyThread extends Thread{
+ReententrLock l = new ReententrLock();
+MyThread(String name){
+super(name);
+}
+public void run(){
+if(l.tryLock(5000, TimeUnit.MILLISECONDS)){
+System.out.println(Thread.currentThread()+getName()+"...got lock");
+try{
+Thread.sleep(3000);
+l.unlock();
+}catch(InteruptedException e)
+{}
+l.unlock();
+System.out.println(Thread.currentThread().getName()+".. Releases lock" );
+break;
+}
+else{
+System.out.println(Thread.currentThread().getName()+".. unable to get lock and wiill try again" );
+}
+}catach
+(Exception e){}
+
+}
+while(true);
+}
+}
+class ReentrantLockDemoDemo{
+public static void main(String[] args){
+
+MyThread t1 = new MyThread("First Thread");
+MyThread t2 = new MyThread("Second Thread");
+t1.start();
+t2.start();
+}
+}
+```
+
