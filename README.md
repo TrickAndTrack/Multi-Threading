@@ -1245,10 +1245,93 @@ service.shutdown();
 
 |Runnable | Callable |
 |-------------| ------------- |
-|If a thread is not requred to return any thing after completing JOb then we should go for runnable | If a thread is requred to return somthing after completing Job then we should go for collable  |
+|If a thread is not required to return anything after completing JOb then we should go for runnable | If a thread is required to return something after completing Job then we should go for callable  |
 | Runabble interface contains only one method Run() | Callable contains only one method call()  |
-| Runnable Job not requred to rertun anything and hecnce return type of runmethod is Void| callable Job is requred to return somthing and henace return type of call method is Object  |
-|With is a run method if threr is any chance of rising checked exception complsery we should handle by usinf try catch becouse we cant use throws keyword runmehtod| inside call method if there is any nchnace of rising checked exception we are notn reured to handle by using try catch becouse call method allready throws exception  |
-| Runnable interface present in java.lang pacakge | Callable interface present in java.util.cuncrrent package |
+| Runnable Job not required to return anything and hence the return type of run method is Void| Callable Job is required to return something and hence the return type of call method is Object  |
+|With a run method if there is any chance of a rising checked exception compulsory we should handle it by using try catch because we can't use the throws keyword runmehtod| inside call method if there is any chance of rising checked exception we are not required to handle by using try catch because call method already throws exception  |
+| Runnable interface present in Java.lang package | Callable interface present in java.util.concurrent package |
 |introduce in 1.0 V| introduce in 1.5 v|
 
+# ThreadLocal
+ThreadLocal class provides thread-local variables thread-local class maintains value per tread bases each thread-local object maintains a separate value like userID transaction ID extra for each thread that exceeds that object.
+Thread can access its local value, can manipulate its value, and even can remove its value and in every part of the code which is executed by the thread we can access its local variable.
+
+Ex consider a servlet Which invokes the sum business method we have required to generate a unique transaction Id for reach ad every request & we have to pass this transaction id to the business method for this requirement we can use this ThreadLocal to maintain separate trnsactrionID for every request that is for every thread.
+
+> Note 1) ThreadLocal class introduced in 1.2 V & enhanced in 1.5 V
+> thread local can be associated with thread scope.
+> Total coat which is executed by thread has access to corresponding Thread localveribale.
+> Thread can exccess its own localveribale and cant access other threads localveribale.
+> Ones the thread is entered into deat state all its local variable are bydifult available for garbage collection.
+
+> Q) How to create ThreadLocal variable?
+
+Constructor => Threadlocal tl = new ThreadLocal(); Create a ThreadLocal variable.
+Methods => Object.get(); // return the value of thread localveribale associated with the current thread.
+Object initialValue(); // returns the initial value of the thread local variable associated with the current thread. the default implementation this method returns null. to customize over own initial value we have to override this method.
+void set(Object newvalue); //  to set a new value 
+void remove(); // to remove the value of thread-local variable to assisted with current thread.
+it is newly added method in 1.5V.
+after removal, if we are trying to access it will be reinitialized once again by invoking its initial value method.
+```
+
+Class ThreadLocalDemo1{
+
+public static void main(String[] args){
+ThreadLocal tl = new ThreadLocal();
+
+{
+public Object initalValue(){
+ return "XYZ"
+}
+
+}
+
+Stystem.out.println(tl.get()); // null 
+tl.set("XYZ");
+Stystem.out.println(tl.get()); // XYZ
+tl.remove();
+Stystem.out.println(tl.get()); // null
+}
+}
+```
+overriding of the initial value of the method.
+
+
+```
+class CustomerThread extends Thread{
+static Integer custId= 0;
+private static  ThreadLocal tl = new ThreadLocal();
+{
+protected Integr initialValue(){
+
+return ++cystId;
+}
+
+};
+
+CustomerThread(String name){
+super(name);
+
+}
+public void run(){
+System.out.println( Thread.currentThread()+getName() + "excuting with customer id:" + tl.get());
+}
+}
+
+Class ThreadLocalDemo2{
+
+public static void main(String[] args){
+ThreadLocal tl = new ThreadLocal();{
+CustomerThread c1 = new CustomerThread("Thread-1");
+CustomerThread c2 = new CustomerThread("Thread-2");
+CustomerThread c3 = new CustomerThread("Thread-3");
+CustomerThread c4 = new CustomerThread("Thread-4");
+c1.start();
+c2.start();
+c3.start();
+c4.start();
+}
+}
+```
+The above program for every customer thread a separate customer Id will be maintained by the thread-local object.
