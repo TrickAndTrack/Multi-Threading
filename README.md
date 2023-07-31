@@ -1161,3 +1161,94 @@ we can submit a runnable Job by using submit method().
 service.submit(job);
 we can shutdown executors service by using.
 service.shutdown();
+
+```
+Import java.util.concurrent.*;
+class PrintJob implements Runnable{
+String name;
+
+PrintJob(String name){
+this.name = name;
+}
+public void run(){
+
+System.out.println(name + " Job started by thread "+ Thread.currentThread()+getName());
+try{
+Thread.sleep(5000);
+}catch(InteruptedException e)
+{}
+System.out.println(name + " Job completed by thread "+Thread.currentThread().getName());
+
+}
+}
+class ExcutorDemo{
+public static void main(String[] args){
+PrintJob[] jobs = { new PrintJob("A"),  new PrintJob("B"),  new PrintJob("C"),  new PrintJob("D"),  new PrintJob("E")};
+
+ExecutorService service = ExecutorService.newFixedThreadPool(3);
+for(PrintJob job: jobs)
+{
+service.submit(job);
+}
+service.shutdown();
+}
+}
+```
+in the above example 3 thread responsible to execute 6 jobs so that a single thread can be reused for multiple jobs.
+> Note: while designing web server & application servers we can use thread pool concept.
+
+> What is a diffrance beween Collable and Runnable?
+
+# Callable and Future:
+in the case of runnable thread wont return anything after completing a job, if a thread is reured to return result after excution then we should go for callable.
+
+Callable interface have only one method call.
+```
+public Object call() throws exception;
+```
+if we submit callable object to excutor then after compelting the job threads return and object of type future. that is furutre object can be used to retrive result from callable job.
+```
+Import java.util.concurrent.*;
+class MyCallable  implements Callable{
+
+int num;
+MyCallable(int num){
+this.num = num;
+}
+public Object call() throws Exception{
+
+System.out.println( Thread.currentThread()+getName() + "is.. resposible to find sum of first "+ num +"number");
+ int sum=0;
+
+for(int i=1; i<=num; i++){
+sum = sum+i;
+}
+}
+return sum;
+}
+}
+
+class CallableFutureDemo{
+public static void main(String[] args) throws Exception{
+MyCallable[] jobs = { new MyCallable(10),  new MyCallable(20),  new MyCallable(30),  new MyCallable(40),  new MyCallable(50)};
+
+ExecutorService service = ExecutorService.newFixedThreadPool(3);
+for(MyCallable job: jobs)
+{
+Future f = service.submit(job);
+System.out.println(f.get());
+}
+service.shutdown();
+}
+}
+```
+
+|Runnable | Callable |
+|-------------| ------------- |
+|If a thread is not requred to return any thing after completing JOb then we should go for runnable | If a thread is requred to return somthing after completing Job then we should go for collable  |
+| Runabble interface contains only one method Run() | Callable contains only one method call()  |
+| Runnable Job not requred to rertun anything and hecnce return type of runmethod is Void| callable Job is requred to return somthing and henace return type of call method is Object  |
+|With is a run method if threr is any chance of rising checked exception complsery we should handle by usinf try catch becouse we cant use throws keyword runmehtod| inside call method if there is any nchnace of rising checked exception we are notn reured to handle by using try catch becouse call method allready throws exception  |
+| Runnable interface present in java.lang pacakge | Callable interface present in java.util.cuncrrent package |
+|introduce in 1.0 V| introduce in 1.5 v|
+
