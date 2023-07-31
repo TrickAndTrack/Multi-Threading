@@ -1335,3 +1335,4 @@ c4.start();
 }
 ```
 The above program for every customer thread a separate customer Id will be maintained by the thread-local object.
+ThreadLocal Vs inherti
