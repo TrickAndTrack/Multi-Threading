@@ -1,4 +1,20 @@
 # Multi-Threading
+Wheater is process bases or thread based the main Objective of multiThreading is reduced response time of section & to improve the perfromance 
+The main imp Application area of multithreading are are to develope multimedia graphics to develope annimation to develope viode games. to develope web serice 7 application server etc.
+
+whenever independant jobs are there there is a best sutibale concept multithreading.
+
+Thread:-> is a flow of excutions 
+we can define thread in the fallowing two way by extendign thread class & by implmenting runnable interface.
+# 1) extending thread class
+Main Method excuted by main Thread.
+Output of thread is various from system to system & JVM to JVM.
+
+## Case 1: Thread shedular
+it is a part of part of JVM it ia a resposnsible to shedular threads that is if multiple threads are waiting to get chance of execution. then in which order thread will be excuted is decided by thred shedular.
+We can not expect exact algorithm fallowed by thread shedular it is varied from JVM to JVM. hence we cant expect thread exicuction order & eaxct output.
+
+Hence whenever situvation comes to multithreading there is No garanty for exact output but we can provide output serveral possible. 
 
 The total process is called a thread.
 
@@ -34,7 +50,12 @@ sout("child thread");
 > main thread creates object thread and main thread started child thread
 
 
-Case 2 ex.
+## Case 2 Diffrance Between t.start() & t.run()
+#### t.start()
+in this case new thread will be created which is responsible for the excution of run method.
+but in the case of t.run() a new thread wont be created and run method will be excuted just like a normal method call by main thread.
+Hence in the above program if we replace t.start() wiht t.run() then the output is child thread 10 time & allowed by main thread.. 10 times total output produced by only main thread.
+
 ```
 class myThread extends Thread{
 // we have to override run method
@@ -47,7 +68,15 @@ sout("child thread");
 }
 ```
 
-case 4:
+
+## case 3: importance of thread class start() method.
+#### start()
+method is resposbible to register the thread with thread shedular other all madnotery activity Hence wihtout excuting thread class start method there is no chnace of starting a new thread in java due to this thread class start method is consider as thread of multithreading.
+start():{
+1) Register this thread with Thread schedular
+2) perform all other madnotery activity
+3) Envoke Run() method.
+}
 
 ```
 class myThread extends Thread{
@@ -61,7 +90,8 @@ sout("int arg run");
 }
 }
 ```
-
+## Case 4: overloading Run() Method
+is always possible thread class start method can invoke no-arg run method other overloaded method we have to call expecitly like a normal method call. 
 ```
 class myThreadDemo {
 
@@ -78,7 +108,7 @@ myThread.start();
 > it is highly recomemnd overide run method otherwise dont go for multithreading concept.
 
 
-Case : 6 Overiding of start() method.
+## Case : 6 Overiding of start() method.
 if you overide start method then over start() Method will be excuted just a like normal method call a new thread wont be created.
 
 ```
@@ -107,7 +137,7 @@ sout(" Main Method");
 
 >Imp Note:  it is not recommended to overide stop method otherwise dont go for multithreading conecpt.
 
-Case 7:
+## Case 7:
 ```
 class myThread extends Thread{
 public void start(){
@@ -138,7 +168,7 @@ Case 8: Thread life cycle
 
 ![Thread_Life_Cycle_(1)](https://github.com/TrickAndTrack/Multi-Threading/assets/73180409/22b13c07-2c13-42c9-b0fd-3c12db3a92e6)
 
-Case 9: after starting a thread if you are trying to to resatrt the same thread then we will get runtime exception saying IllegalThreadstateException like we are going to get
+## Case 9: after starting a thread if you are trying to to resatrt the same thread then we will get runtime exception saying IllegalThreadstateException like we are going to get
 very Imp for Interview
 ```
 class myThreadDemo {
