@@ -1,20 +1,21 @@
 # Multi-Threading
-Wheater is process bases or thread based the main Objective of multiThreading is reduced response time of section & to improve the perfromance 
-The main imp Application area of multithreading are are to develope multimedia graphics to develope annimation to develope viode games. to develope web serice 7 application server etc.
+Whether it is process-based or thread-based, the main objective of multi-threading is to reduce the response time of sections and improve performance.
+The main application areas of multithreading are the development of multimedia graphics, animation, and video games. to develop a web-based Windows application server, etc.
 
-whenever independant jobs are there there is a best sutibale concept multithreading.
+Whenever independent jobs are there, there is a best-suited concept of multithreading.
 
-Thread:-> is a flow of excutions 
-we can define thread in the fallowing two way by extendign thread class & by implmenting runnable interface.
+Thread: There is a flow of executions.
+We can define threads in two ways: by extending thread classes and by implementing runnable interfaces.
+
 # 1) extending thread class
-Main Method excuted by main Thread.
-Output of thread is various from system to system & JVM to JVM.
+The main method is executed by the main thread.
+The output of threads varies from system to system and JVM to JVM.
 
 ## Case 1: Thread shedular
-it is a part of part of JVM it ia a resposnsible to shedular threads that is if multiple threads are waiting to get chance of execution. then in which order thread will be excuted is decided by thred shedular.
-We can not expect exact algorithm fallowed by thread shedular it is varied from JVM to JVM. hence we cant expect thread exicuction order & eaxct output.
+It is a part of JVM that is responsible for scheduler threads, that is if multiple threads are waiting to get a chance of execution. then in which order the thread will be executed is decided by the scheduler.
+We cannot expect an exact algorithm followed by a thread scheduler; it varies from JVM to JVM. Hence, we cannot expect thread execution order or execution output.
 
-Hence whenever situvation comes to multithreading there is No garanty for exact output but we can provide output serveral possible. 
+Hence, whenever the situation comes to multithreading, there is no guarantee for exact output, but we can provide the output as soon as possible.
 
 The total process is called a thread.
 
@@ -52,9 +53,9 @@ sout("child thread");
 
 ## Case 2 Diffrance Between t.start() & t.run()
 #### t.start()
-in this case new thread will be created which is responsible for the excution of run method.
-but in the case of t.run() a new thread wont be created and run method will be excuted just like a normal method call by main thread.
-Hence in the above program if we replace t.start() wiht t.run() then the output is child thread 10 time & allowed by main thread.. 10 times total output produced by only main thread.
+In this case, a new thread will be created, which is responsible for the execution of the run method.
+But in the case of t.run(), a new thread won't be created, and the run method will be executed just like a normal method called by the main thread.
+Hence, in the above program, if we replace t.start() with t.run(), then the output is a child thread 10 times and allowed by the main thread. 10 times the total output produced by only the main thread.
 
 ```
 class myThread extends Thread{
@@ -71,7 +72,7 @@ sout("child thread");
 
 ## case 3: importance of thread class start() method.
 #### start()
-method is resposbible to register the thread with thread shedular other all madnotery activity Hence wihtout excuting thread class start method there is no chnace of starting a new thread in java due to this thread class start method is consider as thread of multithreading.
+The method is responsible for registering the thread with the thread scheduler and all other mandatory activities. Hence, without executing the thread class start method, there is no chance of starting a new thread in Java. This thread class start method is considered a thread of multithreading.
 start():{
 1) Register this thread with Thread schedular
 2) perform all other madnotery activity
@@ -109,7 +110,7 @@ myThread.start();
 
 
 ## Case : 6 Overiding of start() method.
-if you overide start method then over start() Method will be excuted just a like normal method call a new thread wont be created.
+if you override start method then over start() Method will be executed just a like normal method call a new thread wont be created.
 
 ```
 class myThread extends Thread{
@@ -122,6 +123,9 @@ sout(" run Method");
 }
 }
 ```
+
+
+
 ```
 class myThreadDemo {
 public static void main(String[] arg){
