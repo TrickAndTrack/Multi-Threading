@@ -246,17 +246,18 @@ sout("main thread");
 
 
 Case study:
+```
 myrunnable r = new myrunnable();
 thread t1 = new thread();
 thread t2 = new thread(r);
+```
 
-
-Case 1: t.start(); // a new thread will be created which is responsible for the excution of thread class runmethod(), which has emmpty emplimention
-Case 2: t1.run(); // a new thread wiil not be created and thread class run methid will be excuted just like normal method call.
-Case 3: t2.start(); // a new thread will be created which is responsibe for the excution of my runnable class run method
-Case 4: t2.run(); // a new thread wont be created and my runnable run method will be excuted just like normal method call.
-Case 5: r.start(); // we will get compile time error. saying my runnable class dosent have start cappiblity  CE: can not find symbole method stop 
-Case 6: r.run(); // my runnable run method will be excuted like normal method call.
+* Case 1: t.start(); // a new thread will be created which is responsible for the excution of thread class runmethod(), which has emmpty emplimention
+* Case 2: t1.run(); // a new thread wiil not be created and thread class run methid will be excuted just like normal method call.
+* Case 3: t2.start(); // a new thread will be created which is responsibe for the excution of my runnable class run method
+* Case 4: t2.run(); // a new thread wont be created and my runnable run method will be excuted just like normal method call.
+* Case 5: r.start(); // we will get compile time error. saying my runnable class dosent have start cappiblity  CE: can not find symbole method stop 
+* Case 6: r.run(); // my runnable run method will be excuted like normal method call.
 
 which approch is best to define a thread ->extend or implemting which one is best for thread
 among two way define a thread implemtion runnabel approch is recommended in the first approch over class alwasy externs thread class, there is k=no chnace of extednig any other class henac we are messing enhetiance benifit. but in second approch while implmenting runable intrface we can extend any other class, we want any miss inherticae benifit. becous of above resone implmenting runnable interface appoch is recommended that extending thread class.
