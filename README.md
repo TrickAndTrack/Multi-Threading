@@ -268,7 +268,8 @@ among two way define a thread implemtion runnabel approch is recommended in the 
 
 
 
-** thread class constructor 
+** thread class constructor **
+```
 thread t1 = new thread();
 thread t2 = new thread(runnable r);
 thread t3 = new thread(string name);
@@ -277,6 +278,7 @@ thread t5 = new thread(ThreadGroup g, string g);
 thread t6 = new thread(ThreadGroup g, runnable r);
 thread t7 = new thread(ThreadGroup g, runnable r, String name);
 thread t8 = new thread(ThreadGroup g, runnable r, String name, long stacsize);
+```
 > this are the verious thread constructor pregent in constructor class.
 
 
