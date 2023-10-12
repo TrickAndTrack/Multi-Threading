@@ -1,5 +1,29 @@
 # Multi-Threading
-Whether it is process-based or thread-based, the main objective of multi-threading is to reduce the response time of sections and improve performance.
+## Intoduction
+Two way to define a Thread
+1) By extedes Thread class
+2) By Imploementaion Runnable
+* Geeting and setting Name of Thread
+* Thread Priorites
+* The method to prevent Thread exceution
+   * yeild()
+   * join()
+   * sleep()
+* Synchronization
+* Inter Thread Commiunicatio
+* DeadLock
+* Demon Threads
+* Multithreading enchansement
+
+I) multitasking-> divided into two Category
+* process based 
+* Thread based
+* multitasking excluding serveral task simultensly is a concept of multitasking.
+   * executing serveral task simuktansly is conept of multitasking.
+   * executing serveral task simiultansly where each task a sprate independant program is called process based mutlitasking.
+   * executing serveral task simiultansly where each task a sprate independant part of program same program is called Thread based multitasking part & each program independant party called Thead
+     
+* Whether it is process-based or thread-based, the main objective of multi-threading is to reduce the response time of sections and improve performance.
 The main application areas of multithreading are the development of multimedia graphics, animation, and video games. to develop a web-based Windows application server, etc.
 
 Whenever independent jobs are there, there is a best-suited concept of multithreading.
