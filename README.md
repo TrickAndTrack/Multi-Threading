@@ -251,12 +251,16 @@ myrunnable r = new myrunnable();
 thread t1 = new thread();
 thread t2 = new thread(r);
 ```
-
-* Case 1: t.start(); // a new thread will be created which is responsible for the excution of thread class runmethod(), which has emmpty emplimention
+> [!IMPORTANT]
+* Case 1: t.start(); // a new thread will be created which is responsible for the excution of thread class runmethod(), which has emmpty emplimention==
+> [!IMPORTANT]
 * Case 2: t1.run(); // a new thread wiil not be created and thread class run methid will be excuted just like normal method call.
+> [!IMPORTANT]
 * Case 3: t2.start(); // a new thread will be created which is responsibe for the excution of my runnable class run method
 * Case 4: t2.run(); // a new thread wont be created and my runnable run method will be excuted just like normal method call.
+> [!WARNING]  
 * Case 5: r.start(); // we will get compile time error. saying my runnable class dosent have start cappiblity  CE: can not find symbole method stop 
+> [!WARNING]  
 * Case 6: r.run(); // my runnable run method will be excuted like normal method call.
 
 which approch is best to define a thread ->extend or implemting which one is best for thread
